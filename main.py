@@ -10,7 +10,7 @@ import openpyxl
 
 def assessment_json_generation(sheet_id="assessment_sheet/Urdu_assessment_Worksheet.xlsx", lang="Urdu", tab_number=0):
     assessment_type=get_assessment_bucket_title(sheet_id,tab_number)
-    if "words" in assessment_type:
+    if "words" in assessment_type.lower():
         assessment_type= "sight-words"
     else:
         assessment_type= "letter-sounds"
@@ -19,7 +19,7 @@ def assessment_json_generation(sheet_id="assessment_sheet/Urdu_assessment_Worksh
     content_version=get_and_update_content_version(sheet_id,tab_number)
     
     json_content = create_json_from_data(assessment_content,lang,assessment_type,content_version)
-    return json_content
+    return json_content, assessment_type
 
 def get_assessment_bucket_title(sheet_id,tab_number):
     wb = openpyxl.load_workbook(sheet_id, data_only=True)
@@ -59,7 +59,11 @@ def get_assessment_bucket(sheet_id,tab_number):
     return fetched_content
 
 def create_json_from_data(data,lang,assessment_type,content_version):
-    bucket_name=lang.replace(" ","-")+"let-b"
+    if assessment_type == "sight-words":
+        bucket_name = lang.replace(" ","-") + "sw-b"
+    else:
+        bucket_name = lang.replace(" ","-") + "let-b"
+        
     json_data = {
         "quizName": lang+" "+assessment_type.replace("-"," "),
         "appType": "assessment",
@@ -100,21 +104,54 @@ def create_json_from_data(data,lang,assessment_type,content_version):
     return json.dumps(json_data, indent=2)
 
 if __name__ == "__main__":
-    import argparse
+    import sys
+    print("=== Assessment JSON Generator ===")
+    lang_input = input("Enter language (e.g., Urdu, English): ").strip()
+    type_input = input("Enter type of assessment (e.g., letter-sounds, sight-words): ").strip().lower()
 
-    parser = argparse.ArgumentParser(description="Generate assessment content JSON from Excel.")
-    parser.add_argument("--sheet_id", type=str, default="assessment_sheet/Literacy Assessment Worksheet _ English.xlsx", help="Path to the Excel sheet")
-    parser.add_argument("--lang", type=str, default="English", help="Language for the assessment")
-    parser.add_argument("--tab", type=int, default=1, help="Tab index")
+    sheet_dir = "assessment_sheet"
+    sheet_id = None
+    if os.path.exists(sheet_dir):
+        for file in os.listdir(sheet_dir):
+            if file.endswith(".xlsx") and lang_input.lower() in file.lower():
+                sheet_id = os.path.join(sheet_dir, file)
+                break
+                
+    if not sheet_id:
+        print(f"Error: Could not find a worksheet for language '{lang_input}' in {sheet_dir}/")
+        sys.exit(1)
+        
+    print(f"Found worksheet: {sheet_id}")
     
-    args = parser.parse_args()
+    try:
+        wb = openpyxl.load_workbook(sheet_id, data_only=True)
+    except Exception as e:
+        print(f"Error loading workbook: {e}")
+        sys.exit(1)
+        
+    tab_number = -1
+    for i, sheet_name in enumerate(wb.sheetnames):
+        normalized_name = sheet_name.lower()
+        if type_input == "sight-words" and "word" in normalized_name:
+            tab_number = i
+            break
+        elif type_input == "letter-sounds" and ("letter" in normalized_name or "sound" in normalized_name):
+            tab_number = i
+            break
 
-    json_content = assessment_json_generation(
-        sheet_id=args.sheet_id,
-        lang=args.lang,
-        tab_number=args.tab
+    if tab_number == -1:
+        print(f"Error: Could not find a tab for '{type_input}' in the worksheet.")
+        sys.exit(1)
+        
+    print(f"Selected tab: '{wb.sheetnames[tab_number]}' (Index: {tab_number})")
+    
+    json_content, assessment_type = assessment_json_generation(
+        sheet_id=sheet_id,
+        lang=lang_input,
+        tab_number=tab_number
     )
     
-    with open("content.json", "w", encoding="utf-8") as f:
+    filename = f"{lang_input.lower()}-{assessment_type.replace('-', '')}.json"
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(json_content)
-    print("content.json has been generated successfully.")
+    print(f"Success! {filename} has been generated.")
