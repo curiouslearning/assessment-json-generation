@@ -1,0 +1,479 @@
+{
+  "quizName": "Urdu letter sounds",
+  "appType": "assessment",
+  "assessmentType": "letter-sounds",
+  "feedbackText": "fantastic!",
+  "contentVersion": "v0.1",
+  "buckets": [
+    {
+      "bucketID": 1,
+      "bucketName": "Urdulet-b-1",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ا",
+          "itemText": "ا"
+        },
+        {
+          "itemName": "و",
+          "itemText": "و"
+        },
+        {
+          "itemName": "ر",
+          "itemText": "ر"
+        },
+        {
+          "itemName": "ن",
+          "itemText": "ن"
+        },
+        {
+          "itemName": "م",
+          "itemText": "م"
+        },
+        {
+          "itemName": "ل",
+          "itemText": "ل"
+        },
+        {
+          "itemName": "ہ",
+          "itemText": "ہ"
+        },
+        {
+          "itemName": "ک",
+          "itemText": "ک"
+        },
+        {
+          "itemName": "د",
+          "itemText": "د"
+        },
+        {
+          "itemName": "ی",
+          "itemText": "ی"
+        }
+      ]
+    },
+    {
+      "bucketID": 2,
+      "bucketName": "Urdulet-b-2",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ا",
+          "itemText": "ا"
+        },
+        {
+          "itemName": "و",
+          "itemText": "و"
+        },
+        {
+          "itemName": "ر",
+          "itemText": "ر"
+        },
+        {
+          "itemName": "ن",
+          "itemText": "ن"
+        },
+        {
+          "itemName": "م",
+          "itemText": "م"
+        },
+        {
+          "itemName": "ب",
+          "itemText": "ب"
+        },
+        {
+          "itemName": "ت",
+          "itemText": "ت"
+        },
+        {
+          "itemName": "ج",
+          "itemText": "ج"
+        },
+        {
+          "itemName": "ح",
+          "itemText": "ح"
+        },
+        {
+          "itemName": "گ",
+          "itemText": "گ"
+        }
+      ]
+    },
+    {
+      "bucketID": 3,
+      "bucketName": "Urdulet-b-3",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ک",
+          "itemText": "ک"
+        },
+        {
+          "itemName": "د",
+          "itemText": "د"
+        },
+        {
+          "itemName": "ی",
+          "itemText": "ی"
+        },
+        {
+          "itemName": "ب",
+          "itemText": "ب"
+        },
+        {
+          "itemName": "ت",
+          "itemText": "ت"
+        },
+        {
+          "itemName": "پ",
+          "itemText": "پ"
+        },
+        {
+          "itemName": "ث",
+          "itemText": "ث"
+        },
+        {
+          "itemName": "ٹ",
+          "itemText": "ٹ"
+        },
+        {
+          "itemName": "چ",
+          "itemText": "چ"
+        },
+        {
+          "itemName": "خ",
+          "itemText": "خ"
+        }
+      ]
+    },
+    {
+      "bucketID": 4,
+      "bucketName": "Urdulet-b-4",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "پ",
+          "itemText": "پ"
+        },
+        {
+          "itemName": "ث",
+          "itemText": "ث"
+        },
+        {
+          "itemName": "ج",
+          "itemText": "ج"
+        },
+        {
+          "itemName": "ح",
+          "itemText": "ح"
+        },
+        {
+          "itemName": "چ",
+          "itemText": "چ"
+        },
+        {
+          "itemName": "ذ",
+          "itemText": "ذ"
+        },
+        {
+          "itemName": "ز",
+          "itemText": "ز"
+        },
+        {
+          "itemName": "ڑ",
+          "itemText": "ڑ"
+        },
+        {
+          "itemName": "ف",
+          "itemText": "ف"
+        },
+        {
+          "itemName": "ق",
+          "itemText": "ق"
+        }
+      ]
+    },
+    {
+      "bucketID": 5,
+      "bucketName": "Urdulet-b-5",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ب",
+          "itemText": "ب"
+        },
+        {
+          "itemName": "پ",
+          "itemText": "پ"
+        },
+        {
+          "itemName": "ت",
+          "itemText": "ت"
+        },
+        {
+          "itemName": "ث",
+          "itemText": "ث"
+        },
+        {
+          "itemName": "ٹ",
+          "itemText": "ٹ"
+        },
+        {
+          "itemName": "س",
+          "itemText": "س"
+        },
+        {
+          "itemName": "ش",
+          "itemText": "ش"
+        },
+        {
+          "itemName": "ص",
+          "itemText": "ص"
+        },
+        {
+          "itemName": "ض",
+          "itemText": "ض"
+        },
+        {
+          "itemName": "ط",
+          "itemText": "ط"
+        }
+      ]
+    },
+    {
+      "bucketID": 6,
+      "bucketName": "Urdulet-b-6",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "س",
+          "itemText": "س"
+        },
+        {
+          "itemName": "ش",
+          "itemText": "ش"
+        },
+        {
+          "itemName": "ص",
+          "itemText": "ص"
+        },
+        {
+          "itemName": "ض",
+          "itemText": "ض"
+        },
+        {
+          "itemName": "ل",
+          "itemText": "ل"
+        },
+        {
+          "itemName": "ظ",
+          "itemText": "ظ"
+        },
+        {
+          "itemName": "ع",
+          "itemText": "ع"
+        },
+        {
+          "itemName": "غ",
+          "itemText": "غ"
+        },
+        {
+          "itemName": "ں",
+          "itemText": "ں"
+        },
+        {
+          "itemName": "ھ",
+          "itemText": "ھ"
+        }
+      ]
+    },
+    {
+      "bucketID": 7,
+      "bucketName": "Urdulet-b-7",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ب",
+          "itemText": "ب"
+        },
+        {
+          "itemName": "پ",
+          "itemText": "پ"
+        },
+        {
+          "itemName": "ت",
+          "itemText": "ت"
+        },
+        {
+          "itemName": "ث",
+          "itemText": "ث"
+        },
+        {
+          "itemName": "ٹ",
+          "itemText": "ٹ"
+        },
+        {
+          "itemName": "ہ",
+          "itemText": "ہ"
+        },
+        {
+          "itemName": "ے",
+          "itemText": "ے"
+        },
+        {
+          "itemName": "ک",
+          "itemText": "ک"
+        },
+        {
+          "itemName": "گ",
+          "itemText": "گ"
+        },
+        {
+          "itemName": "ق",
+          "itemText": "ق"
+        }
+      ]
+    },
+    {
+      "bucketID": 8,
+      "bucketName": "Urdulet-b-8",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ص",
+          "itemText": "ص"
+        },
+        {
+          "itemName": "ض",
+          "itemText": "ض"
+        },
+        {
+          "itemName": "ط",
+          "itemText": "ط"
+        },
+        {
+          "itemName": "ظ",
+          "itemText": "ظ"
+        },
+        {
+          "itemName": "ج",
+          "itemText": "ج"
+        },
+        {
+          "itemName": "چ",
+          "itemText": "چ"
+        },
+        {
+          "itemName": "ح",
+          "itemText": "ح"
+        },
+        {
+          "itemName": "خ",
+          "itemText": "خ"
+        },
+        {
+          "itemName": "ف",
+          "itemText": "ف"
+        },
+        {
+          "itemName": "ذ",
+          "itemText": "ذ"
+        }
+      ]
+    },
+    {
+      "bucketID": 9,
+      "bucketName": "Urdulet-b-9",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ع",
+          "itemText": "ع"
+        },
+        {
+          "itemName": "غ",
+          "itemText": "غ"
+        },
+        {
+          "itemName": "ج",
+          "itemText": "ج"
+        },
+        {
+          "itemName": "چ",
+          "itemText": "چ"
+        },
+        {
+          "itemName": "ح",
+          "itemText": "ح"
+        },
+        {
+          "itemName": "خ",
+          "itemText": "خ"
+        },
+        {
+          "itemName": "ر",
+          "itemText": "ر"
+        },
+        {
+          "itemName": "ز",
+          "itemText": "ز"
+        },
+        {
+          "itemName": "ڑ",
+          "itemText": "ڑ"
+        },
+        {
+          "itemName": "ن",
+          "itemText": "ن"
+        }
+      ]
+    },
+    {
+      "bucketID": 10,
+      "bucketName": "Urdulet-b-10",
+      "usedItems": [],
+      "items": [
+        {
+          "itemName": "ب",
+          "itemText": "ب"
+        },
+        {
+          "itemName": "ت",
+          "itemText": "ت"
+        },
+        {
+          "itemName": "س",
+          "itemText": "س"
+        },
+        {
+          "itemName": "ش",
+          "itemText": "ش"
+        },
+        {
+          "itemName": "ص",
+          "itemText": "ص"
+        },
+        {
+          "itemName": "ظ",
+          "itemText": "ظ"
+        },
+        {
+          "itemName": "ع",
+          "itemText": "ع"
+        },
+        {
+          "itemName": "غ",
+          "itemText": "غ"
+        },
+        {
+          "itemName": "ں",
+          "itemText": "ں"
+        },
+        {
+          "itemName": "ے",
+          "itemText": "ے"
+        }
+      ]
+    }
+  ]
+}
