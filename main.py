@@ -10,7 +10,7 @@ import openpyxl
 
 def assessment_json_generation(sheet_id="assessment_sheet/Urdu_assessment_Worksheet.xlsx", lang="Urdu", tab_number=0):
     assessment_type=get_assessment_bucket_title(sheet_id,tab_number)
-    if "words" in assessment_type.lower():
+    if "word" in assessment_type.lower():
         assessment_type= "sight-words"
     else:
         assessment_type= "letter-sounds"
