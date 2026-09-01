@@ -8,16 +8,22 @@ import json
 import csv
 import openpyxl
 
-def assessment_json_generation(sheet_id="assessment_sheet/Urdu_assessment_Worksheet.xlsx", lang="Urdu", tab_number=0):
+def assessment_json_generation(sheet_id="assessment_sheet/hausa_spelling_foils_cleaned.xlsx", lang="Hausa", tab_number=0):
     assessment_type=get_assessment_bucket_title(sheet_id,tab_number)
     if "word" in assessment_type.lower():
         assessment_type= "sight-words"
+    elif "spelling" in assessment_type.lower():
+        assessment_type= "spelling"
     else:
         assessment_type= "letter-sounds"
-        
-    assessment_content= get_assessment_bucket(sheet_id,tab_number)
-    content_version=get_and_update_content_version(sheet_id,tab_number)
-    
+
+    assessment_content= get_assessment_bucket(sheet_id,tab_number,assessment_type)
+
+    if assessment_type == "spelling":
+        content_version = "v0.0"
+    else:
+        content_version=get_and_update_content_version(sheet_id,tab_number)
+
     json_content = create_json_from_data(assessment_content,lang,assessment_type,content_version)
     return json_content, assessment_type
 
@@ -49,21 +55,30 @@ def get_and_update_content_version(sheet_id, tab_number):
     else:
         return "Invalid or missing version format in cell E1."
 
-def get_assessment_bucket(sheet_id,tab_number):
+def get_assessment_bucket(sheet_id,tab_number,assessment_type):
+    if assessment_type == "spelling":
+        max_col = 6
+    elif assessment_type == "sight-words":
+        max_col = 2
+    else:
+        max_col = 2
+
     wb = openpyxl.load_workbook(sheet_id, data_only=True)
     worksheet = wb.worksheets[tab_number]
     fetched_content = []
-    for row in worksheet.iter_rows(min_row=2, max_row=151, min_col=1, max_col=2, values_only=True):
-        if row[0] is not None or row[1] is not None:
+    for row in worksheet.iter_rows(min_row=2, max_row=151, min_col=1, max_col=max_col, values_only=True):
+        if any(cell is not None for cell in row):
             fetched_content.append([str(c) if c is not None else "" for c in row])
     return fetched_content
 
 def create_json_from_data(data,lang,assessment_type,content_version):
     if assessment_type == "sight-words":
         bucket_name = lang.replace(" ","-") + "sw-b"
+    elif assessment_type == "spelling":
+        bucket_name = lang.replace(" ","-") + "spell-b"
     else:
         bucket_name = lang.replace(" ","-") + "let-b"
-        
+
     json_data = {
         "quizName": lang+" "+assessment_type.replace("-"," "),
         "appType": "assessment",
@@ -75,19 +90,21 @@ def create_json_from_data(data,lang,assessment_type,content_version):
 
     buckets = {}
     for row in data:
-        if len(row) < 2:
-            continue  
-        
+        if assessment_type == "spelling":
+            if len(row) < 6:
+                continue
+        else:
+            if len(row) < 2:
+                continue
+
         bucketID = unicodedata.normalize('NFC', str(row[0]))
-        itemName = unicodedata.normalize('NFC', str(row[1]))
-        itemText = unicodedata.normalize('NFC', str(row[1]))
 
         if bucketID not in buckets:
             try:
                 b_id_int = int(float(bucketID))
             except ValueError:
                 continue
-            
+
             buckets[bucketID] = {
                 "bucketID": b_id_int,
                 "bucketName": f"{bucket_name}-{b_id_int}",
@@ -95,19 +112,34 @@ def create_json_from_data(data,lang,assessment_type,content_version):
                 "items": []
             }
 
-        buckets[bucketID]["items"].append({
-            "itemName": itemName,
-            "itemText": itemText
-        })
+        if assessment_type == "spelling":
+            item = {
+                "itemName": unicodedata.normalize('NFC', str(row[1])),
+                "itemText": unicodedata.normalize('NFC', str(row[2])),
+                "foils": [
+                    unicodedata.normalize('NFC', str(row[3])),
+                    unicodedata.normalize('NFC', str(row[4])),
+                    unicodedata.normalize('NFC', str(row[5]))
+                ]
+            }
+        else:
+            itemName = unicodedata.normalize('NFC', str(row[1]))
+            itemText = unicodedata.normalize('NFC', str(row[1]))
+            item = {
+                "itemName": itemName,
+                "itemText": itemText
+            }
+
+        buckets[bucketID]["items"].append(item)
 
     json_data["buckets"] = list(buckets.values())
-    return json.dumps(json_data, indent=2)
+    return json.dumps(json_data, indent=2, ensure_ascii=False)
 
 if __name__ == "__main__":
     import sys
     print("=== Assessment JSON Generator ===")
     lang_input = input("Enter language (e.g., Urdu, English): ").strip()
-    type_input = input("Enter type of assessment (e.g., letter-sounds, sight-words): ").strip().lower()
+    type_input = input("Enter type of assessment (e.g., letter-sounds, sight-words, spelling): ").strip().lower()
 
     sheet_dir = "assessment_sheet"
     sheet_id = None
@@ -136,6 +168,9 @@ if __name__ == "__main__":
             tab_number = i
             break
         elif type_input == "letter-sounds" and ("letter" in normalized_name or "sound" in normalized_name):
+            tab_number = i
+            break
+        elif type_input == "spelling" and "spelling" in normalized_name:
             tab_number = i
             break
 
